@@ -1,0 +1,46 @@
+body{
+    background-color: rgb(234, 234, 234);
+    color: black;
+    font-family: Arial;
+    margin: 5px;
+}
+
+
+a{
+    color: white;
+    text-decoration: none;
+    transition: 1s 2s;
+}
+
+
+a:hover {
+    color: rgb(107, 200, 237);
+    text-decoration: underline;
+    transition: 0,3s;
+}
+
+
+header{
+    background-color: rgb(50,31,110);
+    color: white; 
+    padding: 15px; 
+    font-size: 20px;
+    font-family: Primary;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+footer{
+    background-color: rgb(50,31,110); 
+    color: white; 
+    padding: 15px; 
+    font-size: 12pt;
+    text-align: right;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+main{
+    margin: 10px 20px 55px;
+}
