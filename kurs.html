@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор валюты</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="icon" href="logo.png">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .header {
+            height: 300ph;
+            padding-top: 80px;
+        }
+
+        .wrapper {
+            display: flex;
+            box-orient: vertical;
+            box-direction: normal;
+            flex-direction: column;
+            box-align: center;
+            align-items: center;
+            margin: 0 auto;
+            padding: 20px;
+            max-width: 450px;
+            color: #222;
+        }
+
+        .wrapper-title {
+            padding: 0 10px;
+        }
+
+        .wrapper-convert {
+            margin-left: 20px;
+            padding: 20px;
+            width: 400px;
+            border: 2px solid #6b5fce;
+            border-radius: 10px;
+            background-color: #F5F4Ff;
+        }
+
+        button {
+            margin: 0;
+            padding: 8px;
+        }
+    </style>
+
+    <script>
+
+      function convertation() {
+          const url = 'https://www.cbr-xml-daily.ru/daily_json.js';
+          
+          fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const tjs = data.Valute.TJS;
+                const cur = tjs.Value;
+                const nominal  = tjs.Nominal;
+                console.log(data.Valute.TJS);
+
+                let summ = Number(currCount.value);
+                // из какой валюты
+                let fir_curr = String(selectFirCurrency.value);
+                // в какую валюту
+                let sec_curr = selectSecCurrency.value;
+                let result;
+                let curs = fir_curr + sec_curr;
+                console.log(curs);
+                
+                switch (curs) {
+                    case 'RUBTJS':
+                        result = ((summ / cur)* nominal).toFixed(2);
+                        break;
+                    case 'TJSRUB':
+                        result = ((summ*cur)/nominal).toFixed(2);
+                        break;
+                    case 'RUBRUB':
+                    case 'TJSTJS':
+                        result = summ.toFixed(2);
+                        break;
+                    default:
+                        result = 'Incorrect input';
+                }
+                resCurr.innerHTML = result;
+            })
+            .catch(error => {
+                console.error('Ошибка запроса:', error);
+            });
+      }
+
+    </script>
+    
+</head>
+<body>
+    <header>
+        <a href="inform.html" style="padding:  95px;">Наш банк</a>
+        <a href="news.html" style="padding:  95px;">Новости</a>
+        <a href="kurs.html" style="padding:  95px;">Курс валют</a>
+        <a href="kontakts.html" style="padding:  95px;">Контактные данные</a>
+        <a href="video.html" style="padding:  95px;">Видео</a>
+    </header>
+    
+    <main>
+        <div class="header">
+            <div class="wrapper">
+              <div class="wrapper-convert">
+                <h2 class="wrapper-title"> Конвертация валюты </h2>
+                <p>Что конвертируем
+                  <select id="selectFirCurrency">
+                    <option value="RUB">RUB</option>
+                    <option value="TJS">TJS</option>
+                  </select>
+                </p>
+                Конвертируемая сумма
+                <input type="text" id="currCount">
+                <p>
+                  Во что конвертируем
+                  <select id="selectSecCurrency">
+                    <option value="RUB">RUB</option>
+                    <option value="TJS">TJS</option>
+                  </select>
+                </p>
+                <button onclick="convertation()">Конвертровать</button>
+                <p> Итоговая сумма = <span id="resCurr"></span> </p>
+              </div>
+            </div>
+          </div>
+    </main>
+    
+    <footer style="position: fixed;">
+            &copy; 1994-2023, ООО «Земский банк» 
+    </footer>
+</body>
+</html>
