@@ -29,6 +29,7 @@ header{
     position: fixed;
     top: 0;
     width: 100%;
+    text-align: justify
 }
 footer{
     background-color: rgb(50,31,110); 
