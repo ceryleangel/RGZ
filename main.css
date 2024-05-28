@@ -29,7 +29,12 @@ header{
     position: fixed;
     top: 0;
     width: 100%;
-    text-align: justify
+}
+header nav{
+    height: auto;
+    width: auto;
+    display: block;
+    text-align: center;
 }
 footer{
     background-color: rgb(50,31,110); 
